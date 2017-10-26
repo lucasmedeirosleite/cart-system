@@ -10,5 +10,10 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+//= require jquery
 //= require rails-ujs
-//= require_tree .
+//= require materialize
+
+$(document).ready(function() {
+  $('select').material_select();
+});

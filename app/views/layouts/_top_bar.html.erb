@@ -1,0 +1,16 @@
+<nav>
+  <div class="nav-wrapper">
+    <%= link_to '&nbsp;&nbsp;Books store'.html_safe, root_path, class: 'brand-logo' %>
+    <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <% if current_user %>
+          <li><%= link_to 'Cart', '#' %></li>
+          <li>
+            <%= link_to 'Sign out',
+                        sessions_path,
+                        method: :delete,
+                        data: { confirm: 'Are you sure' } %>
+          </li>
+      <% end %>
+    </ul>
+  </div>
+</nav>

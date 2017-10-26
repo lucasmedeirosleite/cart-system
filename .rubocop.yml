@@ -1,0 +1,26 @@
+# This is the configuration used to check the rubocop source code.
+# It was based in some configurations from: https://github.com/bbatsov/rubocop/tree/master/config
+
+Documentation:
+  Enabled: false
+
+AllCops:
+  TargetRubyVersion: 2.4
+
+Metrics/LineLength:
+  Max: 100
+
+Metrics/MethodLength:
+  Exclude:
+    - 'spec/**/*.rb'
+
+  Exclude:
+    - 'spec/**/*.rb'
+
+Metrics/ModuleLength:
+  Exclude:
+    - 'spec/**/*.rb'
+
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*.rb'

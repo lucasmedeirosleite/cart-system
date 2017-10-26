@@ -1,0 +1,17 @@
+<% if flash[:alert] || flash[:notice] || alert || notice %>
+    <div class="row messages-row">
+      <div class="col s12">
+        <% if flash[:notice] || notice %>
+            <div class="card-panel teal darken-1">
+              <%= flash[:notice] || notice %>
+            </div>
+        <% end %>
+
+        <% if flash[:alert] || alert %>
+            <div class="card-panel red darken-1">
+              <%= flash[:alert] || alert %>
+            </div>
+        <% end %>
+      </div>
+    </div>
+<% end %>
