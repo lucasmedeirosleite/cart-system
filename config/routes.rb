@@ -7,8 +7,7 @@ Rails.application.routes.draw do
 
   resources :products, only: :index
 
-  resources :carts, only: [] do
-    get :current, on: :collection
-    resources :items, expect: :show
+  resource :cart, only: :show do
+    resources :items, expect: [:index, :show]
   end
 end

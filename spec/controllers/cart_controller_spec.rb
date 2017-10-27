@@ -7,18 +7,15 @@ RSpec.describe CartsController, type: :controller do
 
   before { authenticate(user) }
 
-  describe 'GET #current' do
+  describe 'GET #show' do
     subject(:get_user_cart) do
-      get :current
+      get :show
     end
-
-    let(:cart) { FactoryBot.create(:cart, user: user) }
-    let(:cart_id) { cart.id }
 
     it 'renders the cart view' do
       get_user_cart
 
-      expect(response).to render_template(:current)
+      expect(response).to render_template(:show)
     end
   end
 end
