@@ -19,7 +19,7 @@ abort('The Rails environment is running in production mode!') if Rails.env.produ
 
 require 'rspec/rails'
 require 'database_cleaner'
-require 'factory_girl_rails'
+require 'factory_bot_rails'
 require 'pry-byebug'
 require 'rspec/rails'
 require 'shoulda-matchers'
