@@ -18,3 +18,6 @@ User.create(name: 'Diogo',
             email: 'diogo@example.com',
             password: 'password',
             password_confirmation: 'password')
+
+Product.find_or_create_by(name: 'Learn RoR - Beginner', price: 24.99)
+Product.find_or_create_by(name: 'Mastering RoR - Level over 9000', price: 9001.0)
