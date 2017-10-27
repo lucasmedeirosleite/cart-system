@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class CartsRepository
-  delegate :create, to: :base_model
+  delegate :create, :find_by, to: :base_model
 
   def initialize(base_model: Cart)
     @base_model = base_model

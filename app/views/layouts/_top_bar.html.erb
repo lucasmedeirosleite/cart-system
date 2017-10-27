@@ -3,7 +3,9 @@
     <%= link_to '&nbsp;&nbsp;Books store'.html_safe, root_path, class: 'brand-logo' %>
     <ul id="nav-mobile" class="right hide-on-med-and-down">
       <% if current_user %>
-          <li><%= link_to 'Cart', '#' %></li>
+          <li>
+            <%= link_to 'Cart', current_carts_path %>
+          </li>
           <li>
             <%= link_to 'Sign out',
                         destroy_user_session_path,

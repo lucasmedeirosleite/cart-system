@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class CartService
-  def initialize(repository: CartsRepository)
+  def initialize(repository: CartsRepository.new)
     @repository = repository
   end
 
