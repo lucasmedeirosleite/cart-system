@@ -1,0 +1,8 @@
+<tr>
+  <td><%= product.id %></td>
+  <td><%= product.name %></td>
+  <td><%= number_to_currency(product.price, precision: 2, locale: :en) %></td>
+  <td>
+    <%= link_to 'Add to cart', '#' %>
+  </td>
+</tr>

@@ -1,0 +1,29 @@
+<div class="row">
+  <div class="col s12">
+    <h2 class="header">Products</h2>
+
+    <table class="bordered highlight responsive-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% if @products.present? %>
+          <% @products.each do |product| %>
+            <%= render partial: 'products/product', locals: { product: product } %>
+          <% end %>
+        <% else %>
+          <tr>
+            <td colspan="4">No products found</td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+  </div>
+</div>
