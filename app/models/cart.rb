@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class Cart < ApplicationRecord
-  enum status: [:active, :pending, :purchased]
+  enum status: %i[active pending purchased]
 
   belongs_to :user
   has_many :items

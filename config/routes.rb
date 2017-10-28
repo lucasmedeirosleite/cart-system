@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
   resource :cart, only: :show do
     patch :purchase
-    resources :items, except: [:index, :show]
+    resources :items, except: %i[index show]
   end
 
   namespace :api do

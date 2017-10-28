@@ -5,6 +5,6 @@ class User < ApplicationRecord
          :rememberable, :trackable, :validatable
 
   has_many :carts
-  
+
   validates :name, presence: true
 end

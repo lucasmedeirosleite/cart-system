@@ -21,9 +21,9 @@ RSpec.describe CartService, type: :service do
 
     context 'when there is no cart' do
       it 'returns a new cart' do
-        expect {
+        expect do
           current_cart
-        }.to change {
+        end.to change {
           Cart.count
         }.by(1)
       end
@@ -41,9 +41,9 @@ RSpec.describe CartService, type: :service do
       end
 
       it 'returns a new active cart' do
-        expect {
+        expect do
           current_cart
-        }.to change {
+        end.to change {
           Cart.count
         }.by(1)
       end
@@ -58,9 +58,9 @@ RSpec.describe CartService, type: :service do
       end
 
       it 'returns a new active cart' do
-        expect {
+        expect do
           current_cart
-        }.to change {
+        end.to change {
           Cart.count
         }.by(1)
       end
@@ -75,9 +75,9 @@ RSpec.describe CartService, type: :service do
       before { Timecop.travel(tomorrow) }
 
       it 'returns the already created cart' do
-        expect {
+        expect do
           current_cart
-        }.not_to change { Cart.count }
+        end.not_to(change { Cart.count })
         expect(current_cart).to eq(cart)
       end
     end

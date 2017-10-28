@@ -13,14 +13,14 @@ Metrics/LineLength:
 Metrics/MethodLength:
   Exclude:
     - 'spec/**/*.rb'
-
-  Exclude:
-    - 'spec/**/*.rb'
+    - 'db/**/*.rb'
 
 Metrics/ModuleLength:
   Exclude:
     - 'spec/**/*.rb'
+    - 'db/**/*.rb'
 
 Metrics/BlockLength:
   Exclude:
     - 'spec/**/*.rb'
+    - 'db/**/*.rb'
