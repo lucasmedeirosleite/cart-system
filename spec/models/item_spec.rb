@@ -9,10 +9,11 @@ RSpec.describe Item, type: :model do
 
   describe 'validations' do
     it { is_expected.to validate_presence_of(:quantity) }
-    it { is_expected.to validate_numericality_of(:quantity).only_integer }
+    it { is_expected.to validate_numericality_of(:quantity)
+          .only_integer.is_greater_than(0) }
 
-    it { is_expected.to validate_presence_of(:cart) }
-    it { is_expected.to validate_presence_of(:product) }
+    it { is_expected.to validate_presence_of(:cart_id) }
+    it { is_expected.to validate_presence_of(:product_id) }
   end
 
   describe 'relations' do

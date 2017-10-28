@@ -11,6 +11,11 @@ class CartsRepository
     user.carts.order(updated_at: :desc).first
   end
 
+  def add_item(cart:, item:)
+    item.cart = cart
+    item.save
+  end
+
   private
 
   attr_reader :base_model

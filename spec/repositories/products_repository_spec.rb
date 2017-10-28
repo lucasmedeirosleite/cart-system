@@ -9,7 +9,9 @@ RSpec.describe ProductsRepository, type: :repository do
     let(:all) { repository.all }
 
     context 'when there is products' do
-      let!(:products) { FactoryBot.create_list(:product, 3) }
+      let(:products) { FactoryBot.create_list(:product, 3) }
+
+      before { products }
 
       it 'returns the stored products' do
         expect(all).to eq(products)

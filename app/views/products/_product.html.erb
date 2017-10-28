@@ -3,6 +3,6 @@
   <td><%= product.name %></td>
   <td><%= number_to_currency(product.price, precision: 2, locale: :en) %></td>
   <td>
-    <%= link_to 'Add to cart', '#' %>
+    <%= link_to 'Add to cart', new_cart_item_path(product_id: product.id) %>
   </td>
 </tr>

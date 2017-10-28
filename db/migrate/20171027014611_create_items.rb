@@ -7,7 +7,5 @@ class CreateItems < ActiveRecord::Migration[5.1]
 
       t.timestamps
     end
-
-    add_index(:items, [:cart_id, :product_id])
   end
 end

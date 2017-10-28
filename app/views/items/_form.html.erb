@@ -1,0 +1,35 @@
+<div class="row">
+  <%= form_for(item, url: item_url , html: { class: 'col s12' }) do |f| %>
+      <h2 class="header"><%= title %></h2>
+
+      <%= f.hidden_field :product_id, value: item.product.id %>
+
+      <%= f.fields_for :product do |pf| %>
+        <div class="row">
+          <div class="input-field col s12">
+            <%= pf.text_field :name, value: item.product.name, class: 'validate', disabled: true %>
+            <%= pf.label :name, 'Product' %>
+          </div>
+        </div>
+      <% end %>
+
+      <div class="row">
+        <div class="input-field col s12">
+          <%= f.number_field :quantity, required: true, placeholder: 'Quantity', class: 'validate' %>
+          <%= f.label :quantity, 'Quantity' %>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="input-field col s12">
+          <%= link_to products_path, class: 'waves-effect waves-light btn' do %>
+              <i class="material-icons left">arrow_back</i>back
+          <% end %>
+
+          <%= f.button class: 'btn waves-effect waves-light right right-align' do %>
+              Save <i class="material-icons right">send</i>
+          <% end %>
+        </div>
+      </div>
+  <% end %>
+</div>

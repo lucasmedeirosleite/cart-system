@@ -8,6 +8,6 @@ Rails.application.routes.draw do
   resources :products, only: :index
 
   resource :cart, only: :show do
-    resources :items, expect: [:index, :show]
+    resources :items, except: [:index, :show]
   end
 end
