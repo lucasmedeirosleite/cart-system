@@ -15,4 +15,8 @@ RSpec.describe Product, type: :model do
     it { is_expected.to validate_uniqueness_of(:name) }
     it { is_expected.to validate_numericality_of(:price) }
   end
+
+  describe 'relations' do
+    it { is_expected.to have_many(:items) }
+  end
 end

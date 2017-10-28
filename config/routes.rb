@@ -11,4 +11,11 @@ Rails.application.routes.draw do
     patch :purchase
     resources :items, except: [:index, :show]
   end
+
+  namespace :api do
+    resource :products, only: [] do
+      get :quantity
+      get :amount
+    end
+  end
 end

@@ -9,6 +9,6 @@ class ApplicationController < ActionController::Base
   private
 
   def current_cart
-    @_current_cart ||= CartService.new.current_cart(user: current_user)
+    @_current_cart ||= CartService.new.current(user: current_user)
   end
 end

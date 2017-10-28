@@ -9,7 +9,6 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-gem 'active_model_serializers'
 gem 'devise'
 
 gem 'jquery-rails', '~> 4.3', '>= 4.3.1'
@@ -38,6 +37,7 @@ group :development do
 end
 
 group :test do
+  gem 'api_matchers'
   gem 'database_cleaner'
   gem 'factory_bot'
   gem 'factory_bot_rails'

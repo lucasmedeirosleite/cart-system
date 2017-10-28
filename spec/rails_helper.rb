@@ -18,6 +18,7 @@ require File.expand_path('../../config/environment', __FILE__)
 abort('The Rails environment is running in production mode!') if Rails.env.production?
 
 require 'rspec/rails'
+require 'api_matchers'
 require 'database_cleaner'
 require 'factory_bot_rails'
 require 'pry-byebug'
@@ -36,6 +37,13 @@ Shoulda::Matchers.configure do |config|
   end
 end
 
+APIMatchers.setup do |config|
+  config.response_body_method = :body
+  config.http_status_method = :status
+  config.header_method = :headers
+  config.header_content_type_key = 'Content-Type'
+end
+
 RSpec.configure do |config|
   %i[controller view request].each do |type|
     config.include ::Rails::Controller::Testing::TestProcess, type: type
@@ -43,6 +51,7 @@ RSpec.configure do |config|
     config.include ::Rails::Controller::Testing::Integration, type: type
   end
 
+  config.include APIMatchers::RSpecMatchers
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.include Devise::Test::ControllerHelpers, type: :view
   config.include AuthenticationHelper, type: :controller

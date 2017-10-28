@@ -9,7 +9,7 @@ RSpec.describe CartService, type: :service do
   let(:user) { FactoryBot.create(:user) }
 
   describe '#current' do
-    subject(:current_cart) { service.current_cart(user: user) }
+    subject(:current_cart) { service.current(user: user) }
 
     let(:cart_status) { Cart.statuses[:active] }
 
