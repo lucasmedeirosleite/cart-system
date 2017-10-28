@@ -21,10 +21,29 @@
           <% end %>
         <% else %>
           <tr>
-            <td colspan="5">Your cart is empty</td>
+            <td colspan="6">Your cart is empty</td>
           </tr>
         <% end %>
       </tbody>
     </table>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col s6">
+    <div class="left-align">
+      <%= "Total to pay: #{number_to_currency(current_cart.total, precision: 2, locale: :en)}" %>
+    </div>
+  </div>
+
+  <div class="col s6">
+    <div class="right-align">
+      <%= link_to purchase_cart_path,
+                  method: :patch,
+                  data: { confirm: 'Are you sure?' },
+                  class: 'waves-effect waves-light btn' do %>
+          <i class="material-icons left">send</i>Purchase
+      <% end %>
+    </div>
   </div>
 </div>

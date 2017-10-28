@@ -9,4 +9,8 @@ class Cart < ApplicationRecord
   def expired?
     (Time.now - updated_at) > 2.days
   end
+
+  def total
+    items.reduce(BigDecimal.new('0')) { |sum, item| sum + item.total }
+  end
 end

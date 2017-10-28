@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :products, only: :index
 
   resource :cart, only: :show do
+    patch :purchase
     resources :items, except: [:index, :show]
   end
 end

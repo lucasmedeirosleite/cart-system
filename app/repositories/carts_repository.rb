@@ -27,6 +27,10 @@ class CartsRepository
     item.destroy
   end
 
+  def purchase(cart:)
+    cart.purchased!
+  end
+
   private
 
   attr_reader :base_model

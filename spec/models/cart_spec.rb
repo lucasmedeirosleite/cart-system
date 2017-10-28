@@ -42,4 +42,19 @@ RSpec.describe Cart, type: :model do
       it { is_expected.to be_expired }
     end
   end
+
+  describe '#total' do
+    subject(:cart) { FactoryBot.create(:cart, user: user) }
+    let(:user) { FactoryBot.create(:user) }
+
+    let!(:item_1) { FactoryBot.create(:item, cart: cart, product: product_1, quantity: 3) }
+    let(:product_1) { FactoryBot.create(:product, price: BigDecimal.new('2')) }
+
+    let!(:item_2) { FactoryBot.create(:item, cart: cart, product: product_2, quantity: 2) }
+    let(:product_2) { FactoryBot.create(:product, price: BigDecimal.new('3')) }
+
+    it 'returns the total in the cart' do
+      expect(cart.total).to eq(BigDecimal.new('12'))
+    end
+  end
 end

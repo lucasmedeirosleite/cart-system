@@ -11,6 +11,8 @@ RSpec.describe CartService, type: :service do
   describe '#current' do
     subject(:current_cart) { service.current_cart(user: user) }
 
+    let(:cart_status) { Cart.statuses[:active] }
+
     let(:today) { Time.now }
 
     before { Timecop.freeze(today) }
@@ -19,6 +21,26 @@ RSpec.describe CartService, type: :service do
 
     context 'when there is no cart' do
       it 'returns a new cart' do
+        expect {
+          current_cart
+        }.to change {
+          Cart.count
+        }.by(1)
+      end
+    end
+
+    context 'when purchased' do
+      let(:cart_status) { Cart.statuses[:purchased] }
+
+      before do
+        FactoryBot.create(:cart,
+                          user: user,
+                          status: cart_status,
+                          created_at: today,
+                          updated_at: today)
+      end
+
+      it 'returns a new active cart' do
         expect {
           current_cart
         }.to change {
