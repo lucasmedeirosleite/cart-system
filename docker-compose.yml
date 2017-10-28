@@ -4,14 +4,19 @@ services:
     image: postgres
     ports:
       - '5435:5432'
+
   app:
     build: .
     command: ./scripts/start
     env_file:
       - '.env'
     volumes:
-      - .:/app
+      - .:/cart-system'
+      - gem_cache:/gems
     ports:
       - '3000:3000'
     links:
       - db
+
+volumes:
+  gem_cache:

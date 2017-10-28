@@ -5,5 +5,9 @@ bundle check || bundle install
 
 bin/rails db:create db:migrate db:seed
 
+if [ -f tmp/pids/server.pid ]; then
+  rm tmp/pids/server.pid
+fi
+
 echo "Starting app server"
 bin/rails s -p 3000 -b '0.0.0.0'
