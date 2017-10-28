@@ -1,0 +1,7 @@
+#!/bin/bash
+
+echo "Building the app..."
+docker-compose build
+
+echo "Installing gems..."
+docker-compose run app bundle install
