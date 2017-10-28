@@ -1,5 +1,30 @@
 <div class="row">
   <div class="col s12">
-    <h2 class="header">Your cart</h2>
+    <h2 class="header">Items in your cart</h2>
+
+    <table class="bordered highlight responsive-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Quantity</th>
+          <th>Unit price</th>
+          <th>Total</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% if current_cart.items.present? %>
+          <% current_cart.items.each do |item| %>
+            <%= render partial: 'carts/item', locals: { item: item } %>
+          <% end %>
+        <% else %>
+          <tr>
+            <td colspan="5">Your cart is empty</td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
   </div>
 </div>

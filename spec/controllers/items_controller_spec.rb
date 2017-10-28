@@ -77,8 +77,79 @@ RSpec.describe ItemsController, type: :controller do
         create_item
 
         expect(response).to render_template(:new)
-        expect(flash[:alert]).to eq('Please check your item(s) again.')
       end
+    end
+  end
+
+  describe 'DELETE #destroy' do
+    subject(:remove_item) do
+      delete :destroy, params: { id: item.id }
+    end
+
+    let(:item) { FactoryBot.create(:item, cart: cart, product: product, quantity: 2) }
+    let(:cart) { FactoryBot.create(:cart, user: user) }
+    let(:product) { FactoryBot.create(:product) }
+
+    it 'removes the product from cart' do
+      remove_item
+
+      expect(response).to redirect_to(cart_path)
+      expect(flash[:notice]).to eq('Item removed from cart.')
+      expect(Item.count).to be_zero
+    end
+  end
+
+  describe 'GET #edit' do
+    subject(:edit_item) do
+      get :edit, params: { id: item_id }
+    end
+
+    context 'when item does not exist' do
+      let(:item_id) { 123 }
+
+      it 'renders the cart page' do
+        edit_item
+
+        expect(response).to redirect_to(cart_path)
+        expect(flash[:alert]).to eq('Cart item not found.')
+      end
+    end
+
+    context 'when item exists' do
+      let(:item_id) { item.id }
+      let(:item) { FactoryBot.create(:item, product: product, cart: cart, quantity: 2) }
+      let(:cart) { FactoryBot.create(:cart, user: user) }
+      let(:product) { FactoryBot.create(:product) }
+
+      it 'render the item edit page' do
+        edit_item
+
+        expect(response).to render_template(:edit)
+        expect(assigns[:item]).to eq(item)
+      end
+    end
+  end
+
+  describe 'PATCH #update' do
+    subject(:update_item) do
+      patch :update, params: { id: item.id, item: item_params }
+    end
+
+    let(:item) { FactoryBot.create(:item, cart: cart, product: product, quantity: 2) }
+    let(:cart) { FactoryBot.create(:cart, user: user) }
+    let(:product) { FactoryBot.create(:product) }
+
+    let(:item_params) do
+      { product_id: product.id, quantity: 3 }
+    end
+
+    it 'updates the item' do
+      update_item
+
+      expect(response).to redirect_to(cart_path)
+      expect(flash[:notice]).to eq('Item updated.')
+      item.reload
+      expect(item.quantity).to eq(3)
     end
   end
 end

@@ -12,8 +12,19 @@ class CartsRepository
   end
 
   def add_item(cart:, item:)
-    item.cart = cart
-    item.save
+    ActiveRecord::Base.transaction do
+      cart.pending!
+      item.cart = cart
+      item.save
+    end
+  end
+
+  def find_cart_item(cart:, item_id:)
+    cart.items.find_by(id: item_id)
+  end
+
+  def remove_item(item:)
+    item.destroy
   end
 
   private

@@ -1,5 +1,5 @@
 <%= render partial: 'items/form', locals: {
   item: @item,
-  item_url: cart_items_path,
-  back_url: products_path,
+  item_url: cart_item_path(@item),
+  back_url: cart_path,
   title: 'Add product to cart' } %>

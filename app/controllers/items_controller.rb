@@ -12,11 +12,30 @@ class ItemsController < ApplicationController
 
   def create
     @item = Item.new(item_params)
-    if CartsRepository.new.add_item(cart: current_cart, item: @item)
+    if repository.add_item(cart: current_cart, item: @item)
       redirect_to cart_path, notice: 'Item added to your cart.'
     else
-      flash[:alert] = 'Please check your item(s) again.'
       render :new
+    end
+  end
+
+  def destroy
+    item = repository.find_cart_item(cart: current_cart, item_id: params[:id])
+    repository.remove_item(item: item)
+    redirect_to cart_path, notice: 'Item removed from cart.'
+  end
+
+  def edit
+    @item = repository.find_cart_item(cart: current_cart, item_id: params[:id])
+    return redirect_to cart_path, alert: 'Cart item not found.' unless @item
+  end
+
+  def update
+    @item = repository.find_cart_item(cart: current_cart, item_id: params[:id])
+    if @item.update(item_params)
+      redirect_to cart_path, notice: 'Item updated.'
+    else
+      render :edit
     end
   end
 
@@ -24,5 +43,9 @@ class ItemsController < ApplicationController
 
   def item_params
     params.require(:item).permit(:product_id, :quantity)
+  end
+
+  def repository
+    @_repository ||= CartsRepository.new
   end
 end

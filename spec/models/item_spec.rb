@@ -20,4 +20,15 @@ RSpec.describe Item, type: :model do
     it { is_expected.to belong_to(:cart) }
     it { is_expected.to belong_to(:product) }
   end
+
+  describe '#total' do
+    subject(:item) { FactoryBot.create(:item, quantity: 2, product: product, cart: cart) }
+    let(:product) { FactoryBot.create(:product, price: BigDecimal.new('2')) }
+    let(:cart) { FactoryBot.create(:cart, user: user) }
+    let(:user) { FactoryBot.create(:user) }
+
+    it 'returns the total of the item' do
+      expect(item.total).to eq(BigDecimal.new('4'))
+    end
+  end
 end
