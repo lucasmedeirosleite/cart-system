@@ -15,12 +15,13 @@ You need to have docker with docker-compose installed.
 ### With docker
 
 * Make sure you give the right permissions to the scripts inside `scripts` directory. (a `chmode 777` can be used)
+* Run `cp .env.sample .env`
 * Run `./scripts/build`
 * Run `docker-compose up`
 
 ### Without docker
 
-* `cp .env.sample .env`
+* Run `cp .env.sample .env`
 * Update the `DATABASE_HOST` env var value inside `.env` to `localhost`
 * Change the `confic/database.yml` credentials based on your local database
 * Run `bundle install`
