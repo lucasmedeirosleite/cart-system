@@ -3,11 +3,21 @@
 module API
   class ProductsController < APIController
     def quantity
-      render json: repository.products_quantities, status: :ok
+      quantities = repository.products_quantities
+      if quantities.present?
+        render json: quantities, status: :ok
+      else
+        render json: { message: 'No data.' }, status: :not_found
+      end
     end
 
     def amount
-      render json: repository.products_amounts, status: :ok
+      amounts = repository.products_amounts
+      if amounts.present?
+        render json: amounts, status: :ok
+      else
+        render json: { message: 'No data.' }, status: :not_found
+      end
     end
 
     private

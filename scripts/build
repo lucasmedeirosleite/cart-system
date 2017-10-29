@@ -1,4 +1,10 @@
 #!/bin/bash
 
-# spin up our image
-docker-compose up --build
+echo "Building the app..."
+docker-compose build
+
+echo "Installing gems..."
+docker-compose run app bundle install
+
+echo "Migrating DB..."
+docker-compose run app bundle exec rails db:create db:migrate db:seed

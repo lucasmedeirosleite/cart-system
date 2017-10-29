@@ -1,22 +1,27 @@
-version: '3.2'
-services:
-  db:
-    image: postgres
-    ports:
-      - '5435:5432'
+db:
+  image: postgres
+  ports:
+    - "5435:5432"
 
-  app:
-    build: .
-    command: ./scripts/start
-    env_file:
-      - '.env'
-    volumes:
-      - .:/cart-system'
-      - gem_cache:/gems
-    ports:
-      - '3000:3000'
-    links:
-      - db
+app:
+  env_file: .env
+  build: .
+  dockerfile: Dockerfile
+  command: ./scripts/start
+  volumes_from:
+    - gems
+    - source_code
+  ports:
+    - "3000:3000"
+  links: &app_links
+    - db
 
-volumes:
-  gem_cache:
+gems:
+  image: busybox
+  volumes:
+    - /gems
+
+source_code:
+  image: busybox
+  volumes:
+    - .:/cart-system

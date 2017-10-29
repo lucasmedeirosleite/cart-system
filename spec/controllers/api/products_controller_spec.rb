@@ -24,8 +24,13 @@ RSpec.describe API::ProductsController, type: :controller do
     it 'returns a json with product quantity' do
       get_quantity
 
-      expect(response).to have_node(product_1.id).with(5)
-      expect(response).to have_node(product_2.id).with(7)
+      expect(response).to have_node(product_1.id)
+      expect(response).to have_node(:product_name).with(product_1.name)
+      expect(response).to have_node(:quantity).with(5)
+
+      expect(response).to have_node(product_2.id)
+      expect(response).to have_node(:product_name).with(product_2.name)
+      expect(response).to have_node(:quantity).with(7)
     end
   end
 
@@ -35,8 +40,13 @@ RSpec.describe API::ProductsController, type: :controller do
     it 'returns a json with product amount' do
       get_amount
 
-      expect(response).to have_node(product_1.id).with('10.0')
-      expect(response).to have_node(product_2.id).with('21.0')
+      expect(response).to have_node(product_1.id)
+      expect(response).to have_node(:product_name).with(product_1.name)
+      expect(response).to have_node(:amount).with('10.0')
+
+      expect(response).to have_node(product_2.id)
+      expect(response).to have_node(:product_name).with(product_2.name)
+      expect(response).to have_node(:amount).with('21.0')
     end
   end
 end

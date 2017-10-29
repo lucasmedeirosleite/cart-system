@@ -9,18 +9,26 @@ class ProductsRepository
 
   def products_quantities
     Product
-      .left_outer_joins(items: [:cart])
+      .joins(items: [:cart])
       .where('carts.status' => Cart.statuses[:pending])
-      .group('items.product_id')
-      .sum('items.quantity')
+      .group('products.name', 'products.id')
+      .select('products.name AS product_name',
+              'products.id AS product_id', 'SUM(items.quantity) AS quantity')
+      .each_with_object({}) do |result, hash|
+        hash[result.product_id] = { product_name: result.product_name, quantity: result.quantity }
+      end
   end
 
   def products_amounts
     Product
-      .left_outer_joins(items: [:cart])
+      .joins(items: [:cart])
       .where('carts.status' => Cart.statuses[:pending])
-      .group('items.product_id')
-      .sum('(items.quantity * products.price)')
+      .group('products.name', 'products.id')
+      .select('products.name AS product_name',
+              'products.id AS product_id', 'SUM(items.quantity * products.price) AS amount')
+      .each_with_object({}) do |result, hash|
+        hash[result.product_id] = { product_name: result.product_name, amount: result.amount }
+      end
   end
 
   private

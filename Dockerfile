@@ -5,7 +5,8 @@ RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - && \
     apt-get update -qq && \
     apt-get upgrade -y && \
     apt-get install -y build-essential libpq-dev nodejs \
-                       postgresql-client \
+                       postgresql-client imagemagick \
+                       libmagic-dev \
                        procps libicu-dev --no-install-recommends && \
     rm -rf /var/lib/apt/lists/*
 
@@ -26,7 +27,5 @@ RUN bundle config --global retry 3
 ENV LANG C.UTF-8
 
 ADD . $APP_HOME
-
-RUN bundle install
 
 CMD ./script/start
