@@ -12,6 +12,10 @@ class Cart < ApplicationRecord
     (Time.now - updated_at) > 2.days
   end
 
+  def available?
+    active? || pending?
+  end
+
   def total
     items.reduce(BigDecimal.new('0')) { |sum, item| sum + item.total }
   end

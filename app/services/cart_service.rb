@@ -7,10 +7,8 @@ class CartService
 
   def current(user:)
     cart = repository.last_from(user: user)
-    if cart
-      cart.expired! if cart.expired?
-      return cart if cart.active? || cart.pending?
-    end
+    cart.expired! if cart&.expired?
+    return cart if cart&.available?
     repository.create(user: user)
   end
 
